@@ -1,0 +1,5 @@
+const Ziggy = {"url":"http:\/\/projeto-bimi.test","port":null,"defaults":{},"routes":{"sanctum.csrf-cookie":{"uri":"sanctum\/csrf-cookie","methods":["GET","HEAD"]},"ignition.healthCheck":{"uri":"_ignition\/health-check","methods":["GET","HEAD"]},"ignition.executeSolution":{"uri":"_ignition\/execute-solution","methods":["POST"]},"ignition.updateConfig":{"uri":"_ignition\/update-config","methods":["POST"]},"panel":{"uri":"\/","methods":["GET","HEAD"]},"login.create":{"uri":"login\/{slug}","methods":["GET","HEAD"],"parameters":["slug"]},"login.store":{"uri":"login","methods":["POST"]},"phone.index":{"uri":"dashboard\/phone\/home","methods":["GET","HEAD"]},"energy.index":{"uri":"dashboard\/energy\/home","methods":["GET","HEAD"]},"health.index":{"uri":"dashboard\/health\/home","methods":["GET","HEAD"]},"logout":{"uri":"logout","methods":["POST"]},"chat":{"uri":"chat","methods":["POST"]}}};
+if (typeof window !== 'undefined' && typeof window.Ziggy !== 'undefined') {
+  Object.assign(Ziggy.routes, window.Ziggy.routes);
+}
+export { Ziggy };
