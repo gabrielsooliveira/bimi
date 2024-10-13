@@ -2,7 +2,13 @@
 
 Este projeto é um sistema de atendente virtual que utiliza inteligência artificial para fornecer respostas rápidas e precisas aos usuários. O sistema é desenvolvido em Laravel para o backend e Vue 3 com Composition API para o frontend, integrado através do Inertia.js. A inteligência artificial é alimentada pelo Gemini, que permite interações avançadas e personalizadas.
 
-<img src="https://github.com/gabrielsooliveira/projeto-bimi/resources/assets/images/Captura de tela de 2024-10-13 03-31-53.png"> 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/10d1b91f-290c-4d69-9b05-102a58cb3a67" alt="image painel" />
+  <img src="https://github.com/user-attachments/assets/978eb352-8ab5-49c0-8c51-9cf6533f456c" alt="image-login" width="237" />
+  <img src="https://github.com/user-attachments/assets/cc3cf187-b35f-4b08-a3a2-a155f95fe7cf" alt="image home" />
+  <img src="https://github.com/user-attachments/assets/b9750eae-69ee-4375-8ad0-7fc7170cff13" alt="image chat" />
+</p>
+
 
 ## Requisitos
 
