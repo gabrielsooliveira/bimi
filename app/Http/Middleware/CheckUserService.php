@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\UserService;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,18 +19,17 @@ class CheckUserService
      */
     public function handle(Request $request, Closure $next, int $serviceId)
     {
-        // Verifica se o usuário está autenticado
-        if (Auth::check()) {
-            $user = Auth::user();
 
-            // Verifica se o user tem o service_id correspondente
-            if ($user->service_id != $serviceId) {
-                // Redireciona para uma página de erro ou de acesso negado
-                return redirect()->route('home')->with('error', 'Acesso negado ao serviço.');
-            }
-        } else {
-            // Se o usuário não está logado, redireciona para a página de login
-            return redirect()->route('login.create', ['slug' => $request->route('slug')]);
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $userService = UserService::where('user_id', Auth::id())
+                                  ->where('service_id', $serviceId)
+                                  ->first();
+
+        if (!$userService) {
+            return redirect()->back()->with('error', 'Você não tem acesso a este serviço.');
         }
 
         return $next($request);

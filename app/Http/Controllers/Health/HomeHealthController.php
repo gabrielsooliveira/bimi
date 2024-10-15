@@ -9,6 +9,10 @@ class HomeHealthController extends Controller
 {
     public function index()
     {
-        return inertia('Dashboard/Home');
+        $plans = $this->getUserPlans();
+
+        return inertia('Dashboard/Home', [
+            'plans' => $plans,
+        ]);
     }
 }

@@ -4,7 +4,7 @@ import Toast from '@/js/Components/Toast.vue';
 import Logo from '@/assets/images/logo-gradient.svg';
 
 const props = defineProps({
-    service: Object
+    service: Object,
 });
 
 const form = useForm({

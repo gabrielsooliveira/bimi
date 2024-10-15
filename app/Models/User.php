@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class, 'user_service')->withPivot('plan_id');
+    }
 }

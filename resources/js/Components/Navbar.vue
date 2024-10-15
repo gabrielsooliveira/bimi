@@ -25,12 +25,6 @@ import { Link } from '@inertiajs/vue3';
                             </Link>
                         </li>
                         <li class="nav-item">
-                            <Link class="nav-link link-secondary" aria-current="page" :class="{ 'active': $page.url === '/dados' }" href="#">
-                                <font-awesome-icon icon="fa-solid fa-gift" />
-                                Planos
-                            </Link>
-                        </li>
-                        <li class="nav-item">
                             <Link class="nav-link link-secondary" aria-current="page" :class="{ 'active': $page.url === '/dados-editados' }" href="#">
                                 <font-awesome-icon icon="fa-solid fa-money-bill-wave" />
                                 Faturas

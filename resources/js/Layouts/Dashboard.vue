@@ -1,5 +1,6 @@
 <script setup>
 import Navbar from '@/js/Components/Navbar.vue';
+import Toast from '@/js/Components/Toast.vue';
 </script>
 
 <template>
@@ -7,4 +8,5 @@ import Navbar from '@/js/Components/Navbar.vue';
     <div class="px-4">
         <slot></slot>
     </div>
+    <Toast></Toast>
 </template>
