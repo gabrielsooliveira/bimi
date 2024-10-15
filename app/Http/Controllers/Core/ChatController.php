@@ -25,7 +25,6 @@ class ChatController  extends Controller
 
         // Salvando o histórico na sessão
         session(['chatHistory' => $chatHistory]);
-        // Retornando a view com o histórico de chat
 
         return inertia('Dashboard/Home', [
             'chatHistory' => $chatHistory,

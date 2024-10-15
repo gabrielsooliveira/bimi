@@ -4,12 +4,13 @@ declare (strict_types = 1);
 
 namespace App\Services;
 
+use App\Models\ConversationHistory;
 use App\Repositories\GeminiAIRepository;
 use Illuminate\Support\Facades\Auth;
 
 class BimiService
 {
-    public static function getResponse(string $message, array $context): string // Alterado para retornar apenas string
+    public static function getResponse(string $message, array $context): string
     {
         $fullMessage = self::buildMessageWithContext($message, $context);
 
@@ -25,6 +26,9 @@ class BimiService
             $botMessage = trim($response['candidates'][0]['content']['parts'][0]['text']);
         }
 
+        // Salvando o histórico da conversa
+        self::saveConversationHistory(Auth::id(), $message, $botMessage);
+
         return $botMessage; // Retorna apenas a mensagem do bot
     }
 
@@ -33,10 +37,30 @@ class BimiService
         $purpose = $context['purpose'];
         $topics = implode(', ', $context['topics']);
         $tone = $context['conversation_tone']['formalidade'];
+
+        // Obtendo o usuário logado
         $user = Auth::user();
-        $contextualMessage = "Contexto:\nPropósito: $purpose\nTópicos: $topics\nTom: $tone\n\nUsuario: $user \n\nMensagem do Usuário: $message";
+        $userName = $user->name;
+        $userEmail = $user->email;
+        $userRole = $user->role; // Exemplo de papel do usuário
+
+        // Construindo o contexto com os dados do usuário
+        $contextualMessage = "Contexto:\nPropósito: $purpose\nTópicos: $topics\nTom: $tone\n\nUsuário: Nome: $userName, Email: $userEmail, Role: $userRole\n\nMensagem do Usuário: $message";
 
         return $contextualMessage;
     }
+
+
+    private static function saveConversationHistory(int $userId, string $message, string $response): void
+    {
+        ConversationHistory::create([
+            'user_id' => $userId,
+            'message' => $message,
+            'response' => $response,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
 }
 

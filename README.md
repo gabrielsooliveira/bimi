@@ -96,5 +96,10 @@ Instale as dependências do Laravel e do Vue.js com os seguintes comandos:
     ```bash
     npm run dev
     ```
+### 5. Sobre o json de chat
 
+1. Objetivo (purpose): Define o objetivo do serviço.
+2. Tópicos (topicos): Lista de tópicos principais tratados pelo serviço.
+3. Regras (rules): Inclui o que pode ser fornecido, o que não pode ser fornecido e quando deve redirecionar para atendimento especializado.
+4. Tom de conversa (conversation_tone): Define o nível de formalidade e características da linguagem a ser utilizada.
 
