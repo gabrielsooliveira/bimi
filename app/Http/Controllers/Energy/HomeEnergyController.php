@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Energy;
 
 use App\Http\Controllers\Controller;
-use App\Models\UserService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Service;
 
 class HomeEnergyController extends Controller
 {
     public function index()
     {
-        $plans = $this->getUserPlans();
+        $service = Service::where('slug', 'energy')->first();
 
         return inertia('Dashboard/Home', [
-            'plans' => $plans,
+            'service' => $service
         ]);
     }
 }

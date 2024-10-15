@@ -13,11 +13,7 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         if (!$request->expectsJson()) {
-            // Captura o slug da URL, se disponível
-            $slug = $request->route('slug');
 
-            // Se o slug estiver presente, usa ele na rota de redirecionamento
-            return route('login.create', ['slug' => $slug]);
         }
 
         return null;

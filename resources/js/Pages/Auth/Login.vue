@@ -9,9 +9,10 @@ const props = defineProps({
 
 const form = useForm({
     email: '',
-    password: '',
-    service_id: props.service.id
+    password: ''
 });
+
+const route_name = props.service.slug + '.login';
 </script>
 
 <template>
@@ -19,7 +20,7 @@ const form = useForm({
     <div class="d-flex align-items-center text-center bg-body-tertiary vh-100">
         <div class="row w-100 h-100">
             <div class="col-lg-8 d-none d-lg-flex align-items-center justify-content-center h-100 bg-secondary">
-                <h1 class="text-white text-center">{{ props.service.name }}</h1>
+                <h1 class="text-white text-center">{{ service.name }}</h1>
             </div>
             <div class="col-lg-4 col-12 d-flex align-items-center h-100">
                 <div class="p-4 w-100">
@@ -30,7 +31,7 @@ const form = useForm({
                     <img :src="Logo" class="img-fluid my-5">
 
                     <div class="form-signin m-auto">
-                        <form @submit.prevent="form.post(route('login.store'))">
+                        <form @submit.prevent="form.post(route(route_name))">
                             <div class="form-floating mt-2">
                                 <input type="email" class="form-control" id="floatingEmail" v-model="form.email"
                                     placeholder="name@example.com">

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => null,
         'passwords' => 'users',
     ],
 
@@ -36,9 +36,19 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'phone' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'user_phone',
+        ],
+
+        'energy' => [
+            'driver' => 'session',
+            'provider' => 'user_energy',
+        ],
+
+        'heath' => [
+            'driver' => 'session',
+            'provider' => 'user_heath',
         ],
     ],
 
@@ -60,15 +70,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'user_phone' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\UserPhone::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'user_energy' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserEnergy::class,
+        ],
+
+        'user_heath' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserHealth::class,
+        ],
     ],
 
     /*

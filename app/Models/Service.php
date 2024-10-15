@@ -13,16 +13,12 @@ class Service extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'has_plan',
     ];
 
     public function plans()
     {
         return $this->hasMany(Plan::class);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'user_service')->withPivot('plan_id');
     }
 }
