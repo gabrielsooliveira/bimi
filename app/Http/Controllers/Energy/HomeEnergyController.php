@@ -9,8 +9,7 @@ class HomeEnergyController extends Controller
 {
     public function index()
     {
-        $service = Service::where('slug', 'energy')->first();
-
+        $service = Service::where('slug', 'energy')->with(['plans'])->first();
         return inertia('Dashboard/Home', [
             'service' => $service
         ]);

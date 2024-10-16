@@ -46,7 +46,7 @@ return [
             'provider' => 'users',
         ],
 
-        'heath' => [
+        'health' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
