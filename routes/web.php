@@ -13,33 +13,39 @@ Route::get('/', [PanelController::class, 'index'])->name('panel');
 
 // Rotas para Phone
 Route::prefix('phone')->group(function () {
-    Route::get('login', [PhoneAuthenticateController::class, 'create'])->name('phone.create.login');
-    Route::post('login', [PhoneAuthenticateController::class, 'login'])->name('phone.login');
-    Route::post('logout', [PhoneAuthenticateController::class, 'logout'])->name('phone.logout');
+    Route::middleware('guest:phone')->group(function () {
+        Route::get('login', [PhoneAuthenticateController::class, 'create'])->name('phone.create.login');
+        Route::post('login', [PhoneAuthenticateController::class, 'login'])->name('phone.login');
+    });
 
     Route::middleware(['auth:phone'])->group(function () {
-        Route::get('/dashboard', [HomePhoneController::class, 'index']);
+        Route::get('/dashboard', [HomePhoneController::class, 'index'])->name('phone.index.home');
+        Route::post('logout', [PhoneAuthenticateController::class, 'logout'])->name('phone.logout');
     });
 });
 
 // Rotas para Energy
 Route::prefix('energy')->group(function () {
-    Route::get('login', [EnergyAuthenticateController::class, 'create'])->name('energy.create.login');
-    Route::post('login', [EnergyAuthenticateController::class, 'login'])->name('energy.login');
-    Route::post('logout', [EnergyAuthenticateController::class, 'logout'])->name('energy.logout');
+    Route::middleware('guest:energy')->group(function () {
+        Route::get('login', [EnergyAuthenticateController::class, 'create'])->name('energy.create.login');
+        Route::post('login', [EnergyAuthenticateController::class, 'login'])->name('energy.login');
+    });
 
     Route::middleware(['auth:energy'])->group(function () {
-        Route::get('/dashboard', [HomeEnergyController::class, 'index']);
+        Route::get('/dashboard', [HomeEnergyController::class, 'index'])->name('energy.index.home');
+        Route::post('logout', [EnergyAuthenticateController::class, 'logout'])->name('energy.logout');
     });
 });
 
 // Rotas para Heath
 Route::prefix('health')->group(function () {
-    Route::get('login', [HealthAuthenticateController::class, 'create'])->name('health.create.login');
-    Route::post('login', [HealthAuthenticateController::class, 'login'])->name('health.login');
-    Route::post('logout', [HealthAuthenticateController::class, 'logout'])->name('health.logout');
+    Route::middleware('guest:health')->group(function () {
+        Route::get('login', [HealthAuthenticateController::class, 'create'])->name('health.create.login');
+        Route::post('login', [HealthAuthenticateController::class, 'login'])->name('health.login');
+    });
 
     Route::middleware(['auth:health'])->group(function () {
-        Route::get('/dashboard', [HomeHealthController::class, 'index']);
+        Route::get('/dashboard', [HomeHealthController::class, 'index'])->name('health.index.home');
+        Route::post('logout', [HealthAuthenticateController::class, 'logout'])->name('health.logout');
     });
 });

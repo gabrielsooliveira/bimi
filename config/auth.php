@@ -38,17 +38,17 @@ return [
     'guards' => [
         'phone' => [
             'driver' => 'session',
-            'provider' => 'user_phone',
+            'provider' => 'users',
         ],
 
         'energy' => [
             'driver' => 'session',
-            'provider' => 'user_energy',
+            'provider' => 'users',
         ],
 
         'heath' => [
             'driver' => 'session',
-            'provider' => 'user_heath',
+            'provider' => 'users',
         ],
     ],
 
@@ -70,19 +70,9 @@ return [
     */
 
     'providers' => [
-        'user_phone' => [
+        'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserPhone::class,
-        ],
-
-        'user_energy' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\UserEnergy::class,
-        ],
-
-        'user_heath' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\UserHealth::class,
+            'model' => App\Models\User::class,
         ],
     ],
 

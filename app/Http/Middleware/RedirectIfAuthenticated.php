@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +20,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                // Obtém o usuário autenticado
                 $user = Auth::guard($guard)->user();
-
-                // Redireciona com base no service_id
                 return redirect($this->getHomeRouteForUser($user));
             }
         }
@@ -32,20 +28,19 @@ class RedirectIfAuthenticated
         return $next($request);
     }
 
-    /**
-     * Retorna a rota "home" para o usuário com base no service_id
-     */
     protected function getHomeRouteForUser($user): string
     {
-        switch ($user->service_id) {
-            case 1:
-                return route('phone.index');
-            case 2:
-                return route('energy.index');
-            case 3:
-                return route('health.index');
-            default:
-                return RouteServiceProvider::HOME; // Caminho padrão caso não haja um service_id correspondente
+        $servicePlan = $user->servicePlans()->first();
+
+        if ($servicePlan) {
+            switch ($servicePlan->service_id) {
+                case 1:
+                    return route('phone.index.home');
+                case 2:
+                    return route('energy.index.home');
+                case 3:
+                    return route('health.index.home');
+            }
         }
     }
 }

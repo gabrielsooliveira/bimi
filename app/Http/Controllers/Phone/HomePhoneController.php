@@ -11,11 +11,9 @@ class HomePhoneController extends Controller
 {
     public function index()
     {
-        $plans = Auth::guard('phone')->user()->relatedPlans();
         $service = Service::where('slug', 'phone')->first();
 
         return inertia('Dashboard/Home', [
-            'plans' => $plans,
             'service' => $service
         ]);
     }
