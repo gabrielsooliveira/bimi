@@ -8,27 +8,17 @@ use Illuminate\Http\Request;
 
 class ChatController  extends Controller
 {
+    protected $bimiService;
+
+    public function __construct(BimiService $bimiService)
+    {
+        $this->bimiService = $bimiService; // Injetar o serviço
+    }
+
     public function conversation(Request $request)
     {
-        $chatHistory = session('chatHistory', []);
-        $contextPath = resource_path('assets/jsons/chat-context.json');
-        $context = json_decode(file_get_contents($contextPath), true);
-
-        // Obtendo apenas a resposta do bot
-        $botMessage = BimiService::getResponse($request->message, $context);
-
-        // Adicionando as mensagens ao histórico de chat
-        $chatHistory[] = [
-            'user' => $request->message,
-            'bot' => $botMessage,
-        ];
-
-        // Salvando o histórico na sessão
-        session(['chatHistory' => $chatHistory]);
-        // Retornando a view com o histórico de chat
-
-        return inertia('Dashboard/Home', [
-            'chatHistory' => $chatHistory,
-        ]);
+        // Chama o serviço para processar a mensagem
+        $reply = $this->bimiService->getResponse($request->service, $request->input('message'));
+        return response()->json(['reply' => $reply]);
     }
 }

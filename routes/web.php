@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\EnergyAuthenticateController;
 use App\Http\Controllers\Auth\HealthAuthenticateController;
 use App\Http\Controllers\Auth\PhoneAuthenticateController;
+use App\Http\Controllers\Core\ChatController;
 use App\Http\Controllers\Core\PanelController;
 use App\Http\Controllers\Energy\HomeEnergyController;
 use App\Http\Controllers\Health\HomeHealthController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Phone\HomePhoneController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PanelController::class, 'index'])->name('panel');
+Route::post('/chat-with-gemini', [ChatController::class, 'conversation'])->name('chat-bot');
 
 // Rotas para Phone
 Route::prefix('phone')->group(function () {

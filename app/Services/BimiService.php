@@ -1,42 +1,28 @@
 <?php
 
-declare (strict_types = 1);
-
 namespace App\Services;
 
 use App\Repositories\GeminiAIRepository;
-use Illuminate\Support\Facades\Auth;
 
 class BimiService
 {
-    public static function getResponse(string $message, array $context): string // Alterado para retornar apenas string
+    protected $geminiRepository;
+
+    public function __construct(GeminiAIRepository $geminiRepository)
     {
-        $fullMessage = self::buildMessageWithContext($message, $context);
-
-        // Chamando o repositório para obter a resposta
-        $items = GeminiAIRepository::getInfo($fullMessage);
-
-        // Convertendo a resposta para um array
-        $response = $items->json();
-
-        // Extraindo apenas o texto da resposta
-        $botMessage = '';
-        if (isset($response['candidates'][0]['content']['parts'][0]['text'])) {
-            $botMessage = trim($response['candidates'][0]['content']['parts'][0]['text']);
-        }
-
-        return $botMessage; // Retorna apenas a mensagem do bot
+        $this->geminiRepository = $geminiRepository;
     }
 
-    private static function buildMessageWithContext(string $message, array $context): string
+    public function getResponse(object $service, string $userMessage): string
     {
-        $purpose = $context['purpose'];
-        $topics = implode(', ', $context['topics']);
-        $tone = $context['conversation_tone']['formalidade'];
-        $user = Auth::user();
-        $contextualMessage = "Contexto:\nPropósito: $purpose\nTópicos: $topics\nTom: $tone\n\nUsuario: $user \n\nMensagem do Usuário: $message";
+        $prompt = $this->buildPrompt($service);
+        $reply = $this->geminiRepository->getInfo($prompt, $userMessage);
 
-        return $contextualMessage;
+        return $reply ?? 'Desculpe, ocorreu um erro ao processar sua solicitação.';
+    }
+
+    private function buildPrompt(object $service): string
+    {
+        return "Você é um assistente virtual especializado no serviço $service. Responda apenas sobre esse serviço.";
     }
 }
-
