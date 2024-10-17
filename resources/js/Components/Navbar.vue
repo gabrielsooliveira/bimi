@@ -1,5 +1,34 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+
+const props = defineProps({
+    service: Object,
+});
+
+const menu = [
+    {
+        href: props.service.slug + '.index.home',
+        title: 'Inicio',
+        icon: 'fa-solid fa-house'
+    },
+    {
+        href: props.service.slug + '.index.home',
+        title: 'Faturas',
+        icon: 'fa-solid fa-money-bill-wave'
+    },
+    {
+        href: props.service.slug + '.index.home',
+        title: 'Conta',
+        icon: 'fa-solid fa-user'
+    },
+    {
+        href: props.service.slug + '.logout',
+        title: 'Sair',
+        icon: 'fa-solid fa-right-from-bracket',
+        method: 'post', // O método post para logout
+        as: 'button' // Botão para post
+    }
+];
 </script>
 
 <template>
@@ -18,28 +47,16 @@ import { Link } from '@inertiajs/vue3';
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1">
-                        <li class="nav-item">
-                            <Link class="nav-link link-secondary" aria-current="page" :class="{ 'active': $page.url === '/' }" href="#">
-                                <font-awesome-icon icon="fa-solid fa-house" />
-                                Inicio
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link class="nav-link link-secondary" aria-current="page" :class="{ 'active': $page.url === '/dados-editados' }" href="#">
-                                <font-awesome-icon icon="fa-solid fa-money-bill-wave" />
-                                Faturas
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link class="nav-link link-secondary" aria-current="page" :class="{ 'active': $page.url === '/perfil' }" href="#">
-                                <font-awesome-icon icon="fa-solid fa-user" />
-                                Conta
-                            </Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link class="nav-link link-secondary" :href="route('logout')" method="post" as="button">
-                                <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
-                                Sair
+                        <li v-for="item in menu" :key="item.title" class="nav-item">
+                            <Link
+                                class="nav-link link-secondary"
+                                :aria-current="item.href === $page.url ? 'page' : null"
+                                :class="{ 'active': $page.url === item.href }"
+                                :href="route(item.href)"
+                                v-bind="{ method: item.method || 'get', as: item.as || 'a' }"
+                            >
+                                <font-awesome-icon :icon="item.icon" />
+                                {{ item.title }}
                             </Link>
                         </li>
                     </ul>
