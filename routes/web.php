@@ -11,7 +11,7 @@ use App\Http\Controllers\Phone\HomePhoneController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PanelController::class, 'index'])->name('panel');
-Route::post('/chat-with-gemini', [ChatController::class, 'conversation'])->name('chat-bot');
+Route::post('/chat-bimi', [ChatController::class, 'conversation'])->name('chat-bot');
 
 // Rotas para Phone
 Route::prefix('phone')->group(function () {

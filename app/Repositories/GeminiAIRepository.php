@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class GeminiAIRepository
 {
-    public static function getInfo(string $prompt, string $message): Response
+    public static function getInfo(String $prompt): Response
     {
         $apiKey = env('GOOGLE_API_KEY');
 
@@ -20,8 +20,7 @@ class GeminiAIRepository
                 [
                     "parts" => [
                         [
-                            "prompt" => $prompt,
-                            "text" => $message
+                            'text' => $prompt,
                         ]
                     ]
                 ]

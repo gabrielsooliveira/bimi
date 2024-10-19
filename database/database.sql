@@ -17,7 +17,15 @@ INSERT INTO plans (service_id, name, price, created_at, updated_at) VALUES
 INSERT INTO users (name, email, password, created_at, updated_at) VALUES
 ('Ricardo Silva', 'ricardo@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()), -- Senha: password
 ('Maria Oliveira', 'maria@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()), -- Senha: password
-('João Pereira', 'joao@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()); -- Senha: password
+('João Pereira', 'joao@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()), -- Senha: password
 ('Silvana Silva', 'silvana@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()), -- Senha: password
 ('Daniel Dantes', 'daniel@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()), -- Senha: password
 ('Sofia Souza', 'sofia@example.com',  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NOW(), NOW()); -- Senha: password
+
+INSERT INTO user_service_plan (user_id, service_id, plan_id, created_at, updated_at) VALUES
+(1, 1, 1, NOW(), NOW());
+(2, 1, 2, NOW(), NOW());
+(3, 2, 4, NOW(), NOW());
+(4, 2, 5, NOW(), NOW());
+(5, 3, NULL, NOW(), NOW());
+(6, 3, NULL, NOW(), NOW());

@@ -13,19 +13,20 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         if (!$request->expectsJson()) {
-            if ($request->is('energy/*') || $request->is('energy')) {
-                return route('energy.login');
+            if ($request->is('energy/*')) {
+                return route('energy.create.login');
             }
 
-            if ($request->is('phone/*') || $request->is('phone')) {
-                return route('phone.login');
+            if ($request->is('phone/*')) {
+                return route('phone.create.login');
             }
 
-            if ($request->is('health/*') || $request->is('health')) {
-                return route('health.login');
+            if ($request->is('health/*')) {
+                return route('health.create.login');
             }
         }
 
         return null;
     }
 }
+

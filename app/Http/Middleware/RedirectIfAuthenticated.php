@@ -14,33 +14,21 @@ class RedirectIfAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string ...$guards): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        $guards = empty($guards) ? [null] : $guards;
+        if ($request->is('energy/*') && Auth::guard('energy')->check()) {
+            return redirect()->route('energy.index.home');
+        }
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                $user = Auth::guard($guard)->user();
-                return redirect($this->getHomeRouteForUser($user));
-            }
+        if ($request->is('phone/*') && Auth::guard('phone')->check()) {
+            return redirect()->route('phone.index.home');
+        }
+
+        if ($request->is('health/*') && Auth::guard('health')->check()) {
+            return redirect()->route('health.index.home');
         }
 
         return $next($request);
     }
-
-    protected function getHomeRouteForUser($user): string
-    {
-        $servicePlan = $user->servicePlans()->first();
-
-        if ($servicePlan) {
-            switch ($servicePlan->service_id) {
-                case 1:
-                    return route('phone.index.home');
-                case 2:
-                    return route('energy.index.home');
-                case 3:
-                    return route('health.index.home');
-            }
-        }
-    }
 }
+
