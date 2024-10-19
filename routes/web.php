@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PanelController::class, 'index'])->name('panel');
 Route::post('/chat-bimi', [ChatController::class, 'conversation'])->name('chat-bot');
+Route::post('/end-chat', [ChatController::class, 'endChat'])->name('end-chat');
 
 // Rotas para Phone
 Route::prefix('phone')->group(function () {

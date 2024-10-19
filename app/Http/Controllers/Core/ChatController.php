@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Core;
 use App\Http\Controllers\Controller;
 use App\Services\BimiService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ChatController extends Controller
 {
@@ -24,5 +25,32 @@ class ChatController extends Controller
         session()->flash('reply', $replyText);
 
         return response()->json(['reply' => $replyText]);
+    }
+
+    public function endChat(Request $request)
+    {
+        // Validar dados recebidos
+        $data = $request->validate([
+            'chatHistory' => 'required|array',
+            'service' => 'required|array',
+        ]);
+
+        $chatHistory = $data['chatHistory'];
+        $serviceName = $data['service']['name'];
+
+        // Montar o conteúdo da conversa
+        $content = "Conversa com o serviço: $serviceName\n\n";
+        foreach ($chatHistory as $chat) {
+            $content .= "Usuário: {$chat['user']}\n";
+            $content .= "Bot: {$chat['bot']}\n\n";
+        }
+
+        // Definir o nome do arquivo com data/hora para evitar duplicidades
+        $filename = 'chat_conversation_' . now()->format('Y-m-d_H-i-s') . '.txt';
+
+        // Gravar o arquivo no storage/app
+        Storage::put("conversations/{$filename}", $content);
+
+        return response()->json(['message' => 'Conversa gravada com sucesso']);
     }
 }

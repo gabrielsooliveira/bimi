@@ -37,6 +37,21 @@ const submitForm = async () => {
 const showModalChat = () => {
     showModal.value = true;
 };
+
+// Finalizar conversa e enviar histórico
+const endConversation = async () => {
+    try {
+        await axios.post(route('end-chat'), {
+            chatHistory: chatHistory.value,
+            service: props.service
+        });
+        alert('Conversa finalizada e registrada com sucesso.');
+        chatHistory.value = []; // Limpar histórico após salvar
+        showModal.value = false; // Fechar modal
+    } catch (error) {
+        console.error('Erro ao finalizar a conversa:', error);
+    }
+};
 </script>
 
 <template>
@@ -49,7 +64,8 @@ const showModalChat = () => {
     </button>
 
     <ModalDialog :isVisible="showModal" @close="showModal = false" title="BIMI - Assistente Virtual" size="lg">
-        <div class="overflow-y-auto p-4 bg-light" style="height: 300px">
+        <button @click="endConversation" class="btn btn-danger mb-2 btn-sm ms-auto d-block">Finalizar Conversa</button>
+        <div class="overflow-y-auto p-4 bg-light rounded" style="height: 300px">
             <div v-for="(message, index) in chatHistory" :key="index">
                 <!-- Mensagem do Usuário -->
                 <div class="d-flex justify-content-end my-1" v-if="message.user">
