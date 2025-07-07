@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('company_id');
-            $table->string('name');
-            $table->float('default_price', 8, 2)->default(0.00);
-            $table->string('billing_cycle')->default(false);
+            $table->uuid('conversation_id')->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
+            $table->enum('sender', ['user', 'bot']);
+            $table->text('content');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('messages');
     }
 };
