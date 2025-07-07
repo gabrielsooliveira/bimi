@@ -25,10 +25,10 @@ export default defineConfig({
         },
     },
     server: {
-        host: 'projeto-bimi.test',
+        host: 'localhost',
         port: 5173,
         hmr: {
-            host: 'projeto-bimi.test',
+            host: 'localhost',
         },
     }
 });

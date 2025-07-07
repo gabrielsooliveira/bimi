@@ -2,6 +2,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 
 import LayoutDashboard from './Layouts/Dashboard.vue';
+import LayoutSite from './Layouts/Site.vue';
 
 import { ZiggyVue } from 'ziggy';
 import { Ziggy } from './ziggy';
@@ -31,6 +32,8 @@ createInertiaApp({
         page.then(module => {
             if (name.startsWith('Dashboard/')) {
                 module.default.layout = LayoutDashboard;
+            }else{
+                module.default.layout = LayoutSite;
             }
         });
         return page;

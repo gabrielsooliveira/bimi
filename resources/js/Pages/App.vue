@@ -1,28 +1,40 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import Logo from '@/assets/images/logo-gradient.svg';
 import LinkButton from '@/js/Components/LinkButton.vue';
 
-const props = defineProps ({
-    services: Array
-});
+const props = defineProps({
+  services: Array
+})
 </script>
 
 <template>
-    <Head title="Painel de Empresas"></Head>
-        <div class="d-flex align-items-center  text-center bg-light vh-100">
-            <div class="m-auto px-4">
-                <img :src="Logo" class="img-fluid">
-                <p class="text-secondary mt-4 semi-bold fs-4">Porque solucionar para um, quando podemos transformar o atendimento para todos?</p>
-                <div class="mt-3 row">
-                    <div class="col-md-4 mt-3" v-for="service in props.services" :key="service.id">
-                        <LinkButton :service="service"></LinkButton>
-                    </div>
-                </div>
+  <Head title="Inicio" />
+    <div class="container text-center px-4 position-relative py-5">
+    <img :src="Logo" alt="Logo" class="img-fluid mb-4" />
 
-                <footer class="mt-5 text-secondary">
-                    <p>© 2024 - Desenvolvido pela equipe Humam AI.</p>
-                </footer>
-            </div>
-        </div>
+    <h2 class="fw-bold text-primary mb-3 display-5">
+      Atendimento inteligente para empresas modernas
+    </h2>
+
+    <p class="text-muted fs-5 mb-5">
+      Porque solucionar para um, quando podemos transformar o atendimento para todos?
+    </p>
+
+    <div class="row justify-content-center g-4">
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-3"
+        v-for="service in props.services"
+        :key="service.id"
+      >
+        <LinkButton :service="service" />
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <Link class="btn btn-primary btn-lg px-5 py-2 rounded-pill shadow-sm fw-semibold" :href="route('login')">
+        Acessar Portal
+      </Link>
+    </div>
+  </div>
 </template>
