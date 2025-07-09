@@ -20,7 +20,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('libary')->with('success', 'Login realizado com sucesso');
+            return redirect()->route('')->with('success', 'Login realizado com sucesso');
         }
 
         return back()->with('error', 'As credenciais fornecidas não coincidem com nossos registros.');

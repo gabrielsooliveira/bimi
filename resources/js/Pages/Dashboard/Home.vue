@@ -1,11 +1,9 @@
 <script setup>
 import { Link, Head } from "@inertiajs/vue3";
-import PlanCard from "@/js/Components/PlanCard.vue";
-
 </script>
 
 <template>
-    <Head title="Home"></Head>
+    <Head title="Dashboard"></Head>
 
     <!-- <div class="px-4">
         <div class="container mt-5">

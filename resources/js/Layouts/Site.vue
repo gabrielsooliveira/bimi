@@ -5,7 +5,7 @@
 
 <template>
   <div class="min-vh-100 d-flex flex-column text-dark">
-    <main class="flex-fill d-flex align-items-center justify-content-center">
+    <main class="flex-fill d-flex align-items-center justify-content-center pt-5 container">
         <div class="position-absolute top-0 start-0 w-100 h-100 z-n1 overflow-hidden d-lg-block d-none">
             <svg
             width="40%"
