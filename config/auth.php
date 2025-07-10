@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => null,
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -36,20 +36,10 @@ return [
     */
 
     'guards' => [
-        'phone' => [
+        'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
-
-        'energy' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'health' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+        ]
     ],
 
     /*

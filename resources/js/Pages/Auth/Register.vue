@@ -22,7 +22,7 @@ const form = useForm({
       </div>
 
       <!-- Formulário -->
-      <form @submit.prevent="form.post(route('register_store'))">
+      <form @submit.prevent="form.post(route('register.store'))">
         <!-- Nome -->
         <div class="mb-3">
           <label class="form-label fw-semibold" for="name">Nome</label>

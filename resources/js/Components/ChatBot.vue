@@ -57,7 +57,7 @@ const endConversation = async () => {
 <template>
     <button
         type="button"
-        class="btn btn-light position-fixed bottom-0 end-0 p-2 m-3 rounded bg-secondary text-white fw-bold"
+        class="btn btn-light position-fixed bottom-0 end-0 p-2 m-3 rounded bg-primary text-white fw-bold"
         @click="showModalChat"
     >
         <font-awesome-icon icon="fa-solid fa-robot" /> BIMI
@@ -84,7 +84,7 @@ const endConversation = async () => {
         <hr>
         <form @submit.prevent="submitForm" class="w-100 d-flex">
             <textarea name="message" id="message" class="form-control me-2" rows="1" v-model="message"></textarea>
-            <button type="submit" class="btn btn-secondary">Enviar</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
     </ModalDialog>
 </template>

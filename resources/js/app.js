@@ -18,7 +18,7 @@ import 'bootstrap';
 library.add(fas, fab, far);
 
 createInertiaApp({
-    title: title => `${title} - Projeto Bemobi`,
+    title: title => `Bimi - ${title}`,
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue');
         const resolvePageComponent = (name, pages) => {
